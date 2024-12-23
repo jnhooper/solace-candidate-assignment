@@ -10,6 +10,10 @@ etc, but not within the time limit. I also would have like to set up proper desi
 I opeted to use react-query. This gives us some nice caching out of the box and some
 fancy dev tools. 
 
+### tooling
+I'm using [volta](https://volta.sh/) to ensure I'm using the right node. it's great,
+you should check it out
+
 ## would have should have could have
 It would have been nice to come up with some pattern for the specialties.. those are kinda
 a drag to look at. 
