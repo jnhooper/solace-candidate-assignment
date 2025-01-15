@@ -54,6 +54,8 @@ export const AdvocateTable = () => {
     replace(`${pathname}?${params.toString()}`);
   }
 
+
+
   const showTable = !isLoading && !error && data?.data
   const tableClassName = `${styles.table} table-auto text-xl border-collapse border border-slate-500`
 
@@ -154,15 +156,45 @@ export const AdvocateTable = () => {
           </tbody>
         </table>
         : null}
-      {isLoading ? <div> ...loading please wait</div> : null}
-      {error ? (
+      <div>
+        <Button
+          onClick={() => {
+            const params = new URLSearchParams(searchParams);
+            const currentPage = params.get('pageNumber')
+            if (!currentPage || currentPage === '0') {
+              return;
+            } else {
 
-        <div className='text-red-500'>
-          Whoops!
-          <br />
-          {error.message}
-        </div>) : null}
-    </div>
+              params.set('pageNumber', `${parseInt(currentPage) - 1}`);
+            }
+            replace(`${pathname}?${params.toString()}`);
+          }}
+        >prev</Button>
+        <Button
+          onClick={() => {
+            const params = new URLSearchParams(searchParams);
+            const currentPage = params.get('pageNumber') || '0'
+            //TODO fix logic
+            if (currentPage === '10') {
+              return;
+            } else {
+              params.set('pageNumber', `${parseInt(currentPage) + 1}`);
+            }
+            replace(`${pathname}?${params.toString()}`);
+          }}
+        >next</Button>
+      </div>
+      {isLoading ? <div> ...loading please wait</div> : null}
+      {
+        error ? (
+
+          <div className='text-red-500'>
+            Whoops!
+            <br />
+            {error.message}
+          </div>) : null
+      }
+    </div >
   )
 
 }

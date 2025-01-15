@@ -14,6 +14,7 @@ export async function GET(req: NextApiRequest, res) {
  const { searchParams } = new URL(req.url as string)
 
   const nameQuery = searchParams.get('name')
+  const pageQuery = searchParams.get('pageNumber')
 
   // this would become a SQL query further down
   let data = advocateData;
@@ -38,6 +39,12 @@ export async function GET(req: NextApiRequest, res) {
       return d.firstName.toLowerCase().includes(nameQuery.toLowerCase())
         || d.lastName.toLowerCase().includes(nameQuery.toLowerCase())
     })
+  }
+  let pagedData = data;
+  if(pageQuery){
+    pagedData.splice()
+  } else {
+    pagedData.splice(0,3)
   }
 
   return Response.json({ data });
